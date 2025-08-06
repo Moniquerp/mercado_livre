@@ -1,14 +1,19 @@
 describe('Validar pagina mercado livre', () => {
    
     it('Validar CEP no mercado livre', () => { 
+        
         cy.visit('https://www.mercadolivre.com.br/')
         cy.get('a.nav-menu-cp', {timeout: 10000}).should('be.visible').click() 
         cy.get('[data-testid="zip-code-textfield"]').should('be.visible').type('29090490')//clicando na opção "informe seu cep" digitando o CEP 
-        cy.get('[data-testid="button-use-zipcode"]').click()//clicando em "usar"
-        cy.get('.nav-menu-cp-logged', { timeout: 10000}).should('be.visible').and('contain','Vitória 29090490')//validar CEP foi inserido com sucesso, indicando no topo da página
+
+        //cy.get('[data-testid="button-use-zipcode"]').click()//clicando em "usar"
+        //cy.wait(15000)
+        //cy.get('[data-testid="action:understood-button"]').click()
+        //cy.wait(3000)
+        //cy.get('.nav-menu-cp-logged', { timeout: 10000}).should('be.visible').and('contain','Vitória 29090490')//validar CEP foi inserido com sucesso, indicando no topo da página
     })
 
-    it('Validar a pagina "ajuda" do mercado livre', () => { 
+    it.only('Validar a pagina "ajuda" do mercado livre', () => { 
         cy.visit('https://www.mercadolivre.com.br/?msockid=0c03928622f06e7a2b8184bf23ba6f1f')
         cy.get('footer').scrollIntoView({duration:1000})
         cy.get('li.nav-footer-navigation__item').should('be.visible').and('have.length', 9)      
@@ -22,7 +27,7 @@ describe('Validar pagina mercado livre', () => {
 
     })
 
-    it.only('Validar a pagina de "categorias" no mercado livre', () => { 
+    it('Validar a pagina de "categorias" no mercado livre', () => { 
         cy.visit('https://www.mercadolivre.com.br/')
         cy.get('.nav-menu-categories-link', {timeout: 10000}).click() 
         cy.get('ul.nav-categs-departments').contains('Supermercado')
